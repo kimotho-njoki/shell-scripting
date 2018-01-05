@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# create a directory
+
+echo "Enter name of directory"
+
+read name
+
+if [ "$name" ]; then
+	mkdir $name
+
+	echo ">>Entering into created directory"
+	cd $name
+
+	echo ">>Creating a virtual environment"
+	virtualenv --python=python3 dj-venv
+
+	echo ">>Sourcing virtual environment"
+	source dj-venv/bin/activate
+
+	echo ">>Installing django"
+	pip install django
+
+	echo ">>Setting up django project"
+	django-admin startproject app
+
+	echo ">>Entering into app directory"
+	cd app/
+
+	echo ">>Run project"
+	python manage.py runserver
+else
+	echo "Directory not created. Enter name."
+fi
+
